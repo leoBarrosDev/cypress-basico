@@ -62,15 +62,22 @@ describe('Central de atendimento ao cliente TAT', () => {
 
         cy.get('#open-text-area')
             .should('be.visible')
+            .clear()
             .type('Mensagem de teste');
 
         cy.get('.button').then(buttons => {
             buttons.each((button) => {
                 if (button.textContent === 'Enviar' && button.type === 'submit') {
-                    cy.wrap(button).click();
+                    cy.wrap(button).click()
                 }
+                cy.get('span.success')
+                    .should('exist')
+                    .and('contain', 'Mensagem enviada com sucesso.');
             });
         });
+
+
+
     })
 
 
