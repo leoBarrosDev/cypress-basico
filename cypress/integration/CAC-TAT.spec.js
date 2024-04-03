@@ -114,8 +114,7 @@ describe('Central de atendimento ao cliente TAT', () => {
             .and('contain', 'Valide os campos obrigatórios!');
     })
 
-    it('Preenchendo um numero de telefone inválido', () => {
-
+    it('Campo teledone aceita apenas números', () => {
         cy.get('#phone')
             .should('be.visible')
             .clear()
@@ -128,6 +127,73 @@ describe('Central de atendimento ao cliente TAT', () => {
         //         throw new Error('O valor do telefone contém caracteres não numéricos');
         //     }
         // });       
+    })
+
+    it('Campo telefone se torna obrigatório quando a opção de mesmo nome for selecionada', () => {
+        cy.get('#firstName')
+            .should('be.visible')
+            .clear()
+            .type('Leandro')
+
+        cy.get('#lastName')
+            .should('be.visible')
+            .clear()
+            .type('Reis')
+
+        cy.get('#email')
+            .should('be.visible')
+            .clear()
+            .type('leohbr@gmail.com')
+
+        cy.get('#phone-checkbox')
+            .should('be.visible')
+            .click()
+            .should('be.checked')
+
+        cy.get('#open-text-area')
+            .should('be.visible')
+            .clear()
+            .type('Mensagem de teste', { delay: 0 })
+
+        cy.get('.button[type="submit"]')
+            .should('be.visible')
+            .should('be.enabled')
+            .and('contain', 'Enviar')
+            .click()
+
+        cy.get('span.error')
+            .should('exist')
+            .and('contain', 'Valide os campos obrigatórios!');
+    })
+
+    it.only('Formulário não deve ser enviado sem os campos obrigatórios', () => {
+        cy.get('#phone')
+            .should('be.visible')
+            .clear()
+            .type('11999999999')
+
+        cy.get('#product')
+            .should('be.visible')
+            .select('Mentoria')
+
+        cy.get('#support-type')
+            .find('input[type="radio"]')
+            .then(radioButtons => {
+                cy.wrap(radioButtons)
+                    .eq(1)
+                    .check()
+                    .should('be.checked');
+            })
+
+        cy.get('.button[type="submit"]')
+            .should('be.visible')
+            .should('be.enabled')
+            .and('contain', 'Enviar')
+            .click()
+
+        cy.get('span.error')
+            .should('exist')
+            .and('contain', 'Valide os campos obrigatórios!');
     })
 })
 
