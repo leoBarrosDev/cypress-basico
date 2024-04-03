@@ -68,6 +68,20 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.send()
         cy.error()
     })
+
+    it.only('Enviando formulário com arquivo anexado', () => {
+        cy.firstName()
+        cy.lastName()
+        cy.email()
+        cy.phone()
+        cy.product()
+        cy.supportType()
+        cy.checkbox()
+        cy.textArea()
+        cy.fileAttach()
+        cy.send()
+        cy.success()
+    })
 })
 
 
