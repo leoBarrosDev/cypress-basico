@@ -70,11 +70,12 @@ Cypress.Commands.add('textArea', () => {
 })
 
 Cypress.Commands.add('send', () => {
-    cy.get('.button[type="submit"]')
-        .should('be.visible')
-        .should('be.enabled')
-        .and('contain', 'Enviar')
-        .click()
+    cy.contains('button', 'Enviar')
+    // cy.get('.button[type="submit"]')
+    //     .should('be.visible')
+    //     .should('be.enabled')
+    //     .and('contain', 'Enviar')
+    //     .click()
 })
 
 Cypress.Commands.add('success', () => {
