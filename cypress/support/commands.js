@@ -70,12 +70,12 @@ Cypress.Commands.add('textArea', () => {
 })
 
 Cypress.Commands.add('send', () => {
-    cy.contains('button', 'Enviar')
-    // cy.get('.button[type="submit"]')
-    //     .should('be.visible')
-    //     .should('be.enabled')
-    //     .and('contain', 'Enviar')
-    //     .click()
+    // cy.contains('button', 'Enviar')
+    cy.get('.button[type="submit"]')
+        .should('be.visible')
+        .should('be.enabled')
+        .and('contain', 'Enviar')
+        .click()
 })
 
 Cypress.Commands.add('success', () => {
@@ -88,4 +88,14 @@ Cypress.Commands.add('error', () => {
     cy.get('span.error')
         .should('exist')
         .and('contain', 'Valide os campos obrigatórios!');
+})
+
+Cypress.Commands.add('fileAttach', () => {
+    cy.get('input[type="file"]')
+        .should('be.visible')
+        .should('not.have.value')
+        .selectFile('cypress/fixtures/example.json')
+        .should(($element) => {
+            expect($element[0].files[0].name).to.eq('example.json')
+        })
 })
