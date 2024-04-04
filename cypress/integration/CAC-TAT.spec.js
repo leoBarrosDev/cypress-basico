@@ -69,7 +69,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.error()
     })
 
-    it.only('Enviando formulário com arquivo anexado', () => {
+    it('Enviando formulário com arquivo anexado', () => {
         cy.firstName()
         cy.lastName()
         cy.email()
@@ -81,6 +81,20 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.fileAttach()
         cy.send()
         cy.success()
+    })
+
+    it('Testando link que abre em nova aba', () => {
+        cy.get('#privacy a')
+            .should('have.attr', 'target', '_blank')
+    })
+
+    it.only('Remove propriedade `target` antes de clicar', () => {
+        cy.get('#privacy a')
+            .invoke('removeAttr', 'target')
+            .click()
+        cy.title()
+            .should('eq', 'Central de Atendimento ao Cliente TAT - Política de privacidade')
+        // .should('not.have.attr', 'target', '_blank')
     })
 })
 
