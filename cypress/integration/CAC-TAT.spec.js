@@ -88,13 +88,14 @@ describe('Central de atendimento ao cliente TAT', () => {
             .should('have.attr', 'target', '_blank')
     })
 
-    it.only('Remove propriedade `target` antes de clicar', () => {
+    it('Remove propriedade `target` antes de clicar', () => {
         cy.get('#privacy a')
             .invoke('removeAttr', 'target')
             .click()
         cy.title()
             .should('eq', 'Central de Atendimento ao Cliente TAT - Política de privacidade')
-        // .should('not.have.attr', 'target', '_blank')
+        cy.contains('p', 'Não salvamos dados submetidos no formulário da aplicação CAC TAT.')
+            .should('be.visible')
     })
 })
 
