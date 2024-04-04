@@ -91,10 +91,11 @@ Cypress.Commands.add('error', () => {
 })
 
 Cypress.Commands.add('fileAttach', () => {
+    cy.fixture('example.json').as('jsonFile')
     cy.get('input[type="file"]')
         .should('be.visible')
         .should('not.have.value')
-        .selectFile('cypress/fixtures/example.json')
+        .selectFile('@jsonFile', { action: 'drag-drop' })
         .should(($element) => {
             expect($element[0].files[0].name).to.eq('example.json')
         })
