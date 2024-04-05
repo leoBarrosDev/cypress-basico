@@ -2,6 +2,8 @@
 
 describe('Central de atendimento ao cliente TAT', () => {
 
+    const three_seconds_in_ms = 3000
+
     beforeEach(() => {
         cy.visit('./src/index.html')
     })
@@ -69,7 +71,8 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.error()
     })
 
-    it('Enviando formulário com arquivo anexado', () => {
+    it.only('Enviando formulário com arquivo anexado', () => {
+        cy.clock()
         cy.firstName()
         cy.lastName()
         cy.email()
@@ -81,6 +84,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.fileAttach()
         cy.send()
         cy.success()
+        cy.tick(three_seconds_in_ms)
     })
 
     it('Testando link que abre em nova aba', () => {
