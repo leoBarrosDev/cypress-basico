@@ -84,7 +84,7 @@ describe('Central de atendimento ao cliente TAT', () => {
     })
 
     it('Testando link que abre em nova aba', () => {
-        cy.get('privacy a')
+        cy.get('#privacy a')
             .should('have.attr', 'target', '_blank')
     })
 
