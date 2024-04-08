@@ -80,8 +80,12 @@ Cypress.Commands.add('send', () => {
 
 Cypress.Commands.add('success', () => {
     cy.get('span.success')
-        .should('exist')
-        .and('contain', 'Mensagem enviada com sucesso.');
+        .should('not.be.visible')
+        .invoke('show')
+        .should('be.visible')
+        .and('contain', 'Mensagem enviada com sucesso.')
+        .invoke('hide')
+        .should('not.be.visible')
 })
 
 Cypress.Commands.add('error', () => {
