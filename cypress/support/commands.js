@@ -2,6 +2,8 @@
 
 import { faker } from '@faker-js/faker';
 
+const longText = Cypress._.repeat(faker.lorem.paragraph(), 3)
+
 const user = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
@@ -66,7 +68,8 @@ Cypress.Commands.add('textArea', () => {
     cy.get('#open-text-area')
         .should('be.visible')
         .clear()
-        .type(faker.lorem.paragraph(), { delay: 0 })
+        .invoke('val', longText)
+        .should('have.value', longText)
 })
 
 Cypress.Commands.add('send', () => {

@@ -2,6 +2,8 @@
 
 describe('Central de atendimento ao cliente TAT', () => {
 
+    const three_seconds_in_ms = 3000
+
     beforeEach(() => {
         cy.visit('./src/index.html')
     })
@@ -74,6 +76,7 @@ describe('Central de atendimento ao cliente TAT', () => {
     })
 
     it('Enviando formulário com arquivo anexado', () => {
+        cy.clock()
         cy.firstName()
         cy.lastName()
         cy.email()
@@ -85,6 +88,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.fileAttach()
         cy.send()
         cy.success()
+        cy.tick(three_seconds_in_ms)
     })
 
     it('Testando link que abre em nova aba', () => {
@@ -100,6 +104,17 @@ describe('Central de atendimento ao cliente TAT', () => {
             .should('eq', 'Central de Atendimento ao Cliente TAT - Política de privacidade')
         cy.contains('p', 'Não salvamos dados submetidos no formulário da aplicação CAC TAT.')
             .should('be.visible')
+    })
+
+    it('Encontrando o gato no código', () => {
+        cy.get('#cat')
+            .invoke('show')
+            .should('be.visible')
+
+        cy.get('#title')
+            .invoke('text', 'Leandro Reis')
+        cy.get('#subtitle')
+            .invoke('text', 'Quality Engineer 💻')
     })
 })
 
