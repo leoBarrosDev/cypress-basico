@@ -12,7 +12,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.title()
             .should('eq', 'Central de Atendimento ao Cliente TAT')
     })
-    it.only('Preenche corretamente todos os campos do formulário', () => {
+    it('Preenche corretamente todos os campos do formulário', () => {
         cy.firstName()
         cy.lastName()
         cy.email()
@@ -100,6 +100,17 @@ describe('Central de atendimento ao cliente TAT', () => {
             .should('eq', 'Central de Atendimento ao Cliente TAT - Política de privacidade')
         cy.contains('p', 'Não salvamos dados submetidos no formulário da aplicação CAC TAT.')
             .should('be.visible')
+    })
+
+    it('Encontrando o gato no código', () => {
+        cy.get('#cat')
+            .invoke('show')
+            .should('be.visible')
+
+        cy.get('#title')
+            .invoke('text', 'Leandro Reis')
+        cy.get('#subtitle')
+            .invoke('text', 'Quality Engineer 💻')
     })
 })
 
