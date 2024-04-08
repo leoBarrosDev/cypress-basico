@@ -12,7 +12,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.title()
             .should('eq', 'Central de Atendimento ao Cliente TAT')
     })
-    it('Preenche corretamente todos os campos do formulário', () => {
+    it.only('Preenche corretamente todos os campos do formulário', () => {
         cy.firstName()
         cy.lastName()
         cy.email()
@@ -71,7 +71,7 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.error()
     })
 
-    it.only('Enviando formulário com arquivo anexado', () => {
+    it('Enviando formulário com arquivo anexado', () => {
         cy.clock()
         cy.firstName()
         cy.lastName()
