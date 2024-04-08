@@ -6,10 +6,14 @@ describe('Central de atendimento ao cliente TAT', () => {
         cy.visit('./src/index.html')
     })
     // const partnerPhone = /^[0-9]+$/
-    it('Verifica o título da aplicação', () => {
-        cy.title()
-            .should('eq', 'Central de Atendimento ao Cliente TAT')
+
+    Cypress._.times(3, () => {
+        it('Verifica o título da aplicação', () => {
+            cy.title()
+                .should('eq', 'Central de Atendimento ao Cliente TAT')
+        })
     })
+
     it('Preenche corretamente todos os campos do formulário', () => {
         cy.firstName()
         cy.lastName()
